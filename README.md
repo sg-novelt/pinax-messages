@@ -293,6 +293,10 @@ New message form.
 
 ## Change Log
 
+### 4.0.1
+
+* Fix initial value in message creation form
+
 ### 4.0.0
 
 * Takeover by Novel-T
