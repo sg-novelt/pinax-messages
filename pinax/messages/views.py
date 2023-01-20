@@ -1,3 +1,4 @@
+from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, HttpResponse, HttpRequest
 from django.shortcuts import render
@@ -6,12 +7,14 @@ from django.utils.decorators import method_decorator
 from django.views.generic import (
     CreateView,
     DeleteView,
-    TemplateView,
     UpdateView,
 )
 
 from .forms import MessageReplyForm, NewMessageForm
 from .models import Thread
+
+
+UserModel = get_user_model()
 
 
 @login_required
@@ -69,7 +72,8 @@ class MessageCreateView(CreateView):
         user_ids = ()
         if "to_users" in self.request.GET:
             user_ids = map(int, self.request.GET.getlist("to_users"))
-        return {"to_users": user_ids}
+            user_qset = UserModel.objects.filter(pk__in=user_ids)
+        return {"to_users": user_qset}
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
