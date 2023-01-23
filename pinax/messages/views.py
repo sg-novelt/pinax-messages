@@ -69,7 +69,7 @@ class MessageCreateView(CreateView):
         return super().dispatch(*args, **kwargs)
 
     def get_initial(self):
-        user_ids = ()
+        user_qset = UserModel.objects.none()
         if "to_users" in self.request.GET:
             user_ids = map(int, self.request.GET.getlist("to_users"))
             user_qset = UserModel.objects.filter(pk__in=user_ids)
