@@ -293,6 +293,10 @@ New message form.
 
 ## Change Log
 
+### 4.0.2
+
+* Fix uninitialized variable
+
 ### 4.0.1
 
 * Fix initial value in message creation form
